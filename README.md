@@ -1,6 +1,15 @@
-# Cryptocurrency Market Trends — Power BI Dashboard
+# Crypto Market Performance Dashboard — Power BI
 
-An interactive Power BI dashboard analyzing cryptocurrency market behavior, price trends, volume patterns, and volatility indicators across major coins. Built to demonstrate end-to-end business intelligence skills — from raw data ingestion to decision-ready visual reporting.
+An interactive Power BI dashboard tracking market cap, volume, and price trends across 7 major cryptocurrencies from 2017–2021. Built to demonstrate end-to-end business intelligence skills — from raw data ingestion to decision-ready visual reporting.
+
+---
+
+## Dashboard Preview
+
+| Page | Screenshot |
+|---|---|
+| Market Overview | ![Dashboard Snapshot](screenshots/Dashboard_Snapshot.png) |
+| Price Trends Analysis | ![Price Trends](screenshots/Price_Trends_Analysis.png) |
 
 ---
 
@@ -8,22 +17,18 @@ An interactive Power BI dashboard analyzing cryptocurrency market behavior, pric
 
 | Page | Description |
 |---|---|
-| Market Overview | High-level KPIs — market cap, dominance, 24h change across top coins |
-| Price Trends | Time-series analysis of historical price movements with moving averages |
-| Volume Analysis | Trading volume patterns and correlation with price action |
-| Volatility Metrics | Risk indicators and % change distributions |
-
-> **Screenshots** are available in the `/screenshots` folder.
+| Market Overview | KPI cards for volume, market cap, high/low/average prices with market cap time-series by date |
+| Price Trends Analysis | High/low and open/close price trends by date with coin and year slicers |
 
 ---
 
 ## Key Features
 
-- **Dynamic filtering** — Slice by coin, date range, and market cap tier
-- **DAX measures** — Custom calculations for % change, rolling averages, and volatility scores
-- **Data modeling** — Star schema with a central fact table and supporting dimension tables
-- **Drill-through pages** — Click any coin to deep-dive into its individual metrics
-- **Bookmarks & buttons** — Navigation between report pages without using Power BI tabs
+- **Coin slicer** — Filter across BTC, ETH, BNB, XRP, Dogecoin, Stellar, NEM
+- **Year slicer** — Drill into 2017, 2018, 2019, 2020, or 2021
+- **KPI cards** — Volume, Market Cap, High, Low, Average price at a glance
+- **Drill-through navigation** — Arrow buttons to switch between dashboard pages
+- **Time-series visuals** — Market cap, open/close, and high/low trends over time
 
 ---
 
@@ -31,75 +36,50 @@ An interactive Power BI dashboard analyzing cryptocurrency market behavior, pric
 
 | Field | Details |
 |---|---|
-| Source | [CoinGecko API](https://www.coingecko.com/en/api) / CSV export |
-| Coins covered | BTC, ETH, BNB, SOL, XRP *(update as applicable)* |
-| Time range | Jan 2023 – Present |
-| Refresh | Manual / Scheduled *(update as applicable)* |
+| Coins covered | BTC, ETH, BNB, XRP, Dogecoin, Stellar, NEM |
+| Time range | 2017 – 2021 |
+| Fields | SNo, Name, Symbol, Date, High, Low, Open, Close, Volume, MarketCap |
+| Format | CSV per coin + consolidated Excel (CryptoData.xlsx) |
+| Refresh | Manual |
 
 ---
 
 ## Tech Stack
 
 - **Power BI Desktop** — Report development and data modeling
-- **Power Query (M)** — Data ingestion, cleaning, and transformation
-- **DAX** — Measures and calculated columns
+- **Power Query** — Data ingestion, cleaning, and transformation
+- **DAX** — KPI measures and calculated columns
 - **Excel / CSV** — Raw dataset storage
-
----
-
-## DAX Highlights
-
-```dax
--- 7-Day Rolling Average Price
-Rolling Avg Price =
-AVERAGEX(
-    DATESINPERIOD('Date'[Date], LASTDATE('Date'[Date]), -7, DAY),
-    [Average Close Price]
-)
-
--- % Change from Previous Period
-Price Change % =
-DIVIDE(
-    [Latest Close Price] - [Previous Close Price],
-    [Previous Close Price],
-    0
-)
-```
-
----
-
-## Data Model
-
-```
-FactPrices (date, coin_id, open, high, low, close, volume, market_cap)
-    |
-    |--- DimCoin (coin_id, name, symbol, category)
-    |--- DimDate (date, year, month, quarter, week)
-```
 
 ---
 
 ## How to Use
 
 1. Clone or download this repository
-2. Open `Cryptocurrency_Market_Trends.pbix` in **Power BI Desktop**
-3. If using live data, update the data source path in **Transform Data > Data Source Settings**
+2. Open `CryptoCurrency_Dashboard.pbix` in **Power BI Desktop**
+3. Update the data source path in **Transform Data > Data Source Settings** to point to the `/dataset` folder
 4. Refresh the dataset
-5. Explore the report using the navigation buttons on each page
+5. Use the coin and year slicers to explore, and the arrow buttons to navigate between pages
 
 ---
 
 ## Project Structure
 
 ```
-📁 Cryptocurrency-Market-Trends/
-├── 📊 Cryptocurrency_Market_Trends.pbix
+📁 Crypto-Market-Performance-Dashboard/
+├── 📊 CryptoCurrency_Dashboard.pbix
 ├── 📁 dataset/
-│   └── crypto_prices.csv
+│   ├── CryptoData.xlsx
+│   ├── coin_Bitcoin.csv
+│   ├── coin_Ethereum.csv
+│   ├── coin_BinanceCoin.csv
+│   ├── coin_XRP.csv
+│   ├── coin_Dogecoin.csv
+│   ├── coin_Stellar.csv
+│   └── coin_NEM.csv
 ├── 📁 screenshots/
-│   ├── overview.png
-│   ├── price_trends.png
-│   └── volume_analysis.png
+│   ├── Dashboard_Snapshot.png
+│   └── Price_Trends_Analysis.png
 └── 📄 README.md
 ```
 
@@ -107,10 +87,12 @@ FactPrices (date, coin_id, open, high, low, close, volume, market_cap)
 
 ## Skills Demonstrated
 
-`Power BI` `DAX` `Data Modeling` `Power Query` `Business Intelligence` `Data Visualization` `KPI Reporting` `ETL`
+`Power BI` `DAX` `Power Query` `Data Modeling` `Business Intelligence` `Data Visualization` `KPI Reporting` `ETL`
 
 ---
 
+## About
 
+Built as part of a portfolio to demonstrate Power BI and data analytics skills. This project reflects real-world BI workflows — raw data → cleaned model → actionable dashboard — aligned with enterprise reporting standards.
 
 

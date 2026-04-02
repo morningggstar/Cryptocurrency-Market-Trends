@@ -53,16 +53,6 @@ An interactive Power BI dashboard tracking market cap, volume, and price trends 
 
 ---
 
-## How to Use
-
-1. Clone or download this repository
-2. Open `CryptoCurrency_Dashboard.pbix` in **Power BI Desktop**
-3. Update the data source path in **Transform Data > Data Source Settings** to point to the `/dataset` folder
-4. Refresh the dataset
-5. Use the coin and year slicers to explore, and the arrow buttons to navigate between pages
-
----
-
 ## Project Structure
 
 ```
